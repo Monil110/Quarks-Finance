@@ -9,13 +9,17 @@ import { motion } from 'framer-motion';
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyD7sDZFPhuVJcUYGd2vv7pkhM-iDCWPoD0",
-  authDomain: "quarksfinance-90c76.firebaseapp.com",
-  projectId: "quarksfinance-90c76",
-  storageBucket: "quarksfinance-90c76.firebasestorage.app",
-  messagingSenderId: "690490131436",
-  appId: "1:690490131436:web:72fc5f579ba201971276c9"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
+
+if (!firebaseConfig.apiKey) {
+  throw new Error('Missing Firebase configuration. Please check your environment variables.');
+}
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
